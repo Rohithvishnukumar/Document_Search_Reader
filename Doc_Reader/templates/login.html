@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login | Doc Search Reader</title>
+   <link rel="shortcut icon" href="/Pro-Pomodoro1.png" type="image/x-icon">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Playwrite+NL:wght@100..400&display=swap" rel="stylesheet">
+   <link rel="shortcut icon" href="../static/images/logo1.png" type="image/x-icon">
+
+   <style>
+      .winfo {
+         margin-left: 5vw;
+         color: red;
+      }
+
+
+      body {
+         margin-top: 0.5vh;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         background-color: #f0f0f0;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+      }
+
+      .login-container {
+
+         background: #fff;
+         padding: 20px;
+         border-radius: 20px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         margin-top: 0vh;
+         width: 35vw;
+         height: 58vh;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+      }
+
+      h2 {
+         margin: 0 0 20px;
+         text-align: center;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+      }
+
+      .input-group {
+         margin-bottom: 15px;
+         position: relative;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+         border-radius: 20px;
+      }
+
+      label {
+         display: block;
+         margin-bottom: 5px;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+      }
+
+      input {
+         width: 100%;
+         padding: 10px;
+         border: 1px solid #ccc;
+         border-radius: 15px;
+         box-sizing: border-box;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+      }
+
+      input:focus {
+         border-color: #007bff;
+      }
+
+      small {
+         color: red;
+         position: absolute;
+         bottom: -20px;
+         left: 0;
+         visibility: hidden;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+      }
+
+      button {
+         width: 70%;
+         padding: 10px;
+         border: none;
+         border-radius: 18px;
+         background: #000000;
+         color: #fff;
+         font-size: 16px;
+         cursor: pointer;
+         margin-top: 3vh;
+         margin-left: 5vw;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+         font-size: 19px;
+
+      }
+
+      button:hover {
+         background: #6a9701;
+
+      }
+
+      .cont {
+         margin-top: 0.5vh;
+         display: flex;
+         gap: 20vw;
+         flex-wrap: wrap;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+      }
+
+      .logoimg {
+         width: 17.5vw;
+         height: 30vh;
+         margin-top: 15vh;
+         font-family: Calibri, Arial, Helvetica, sans-serif;
+      }
+
+      .anc {
+         text-align: center;
+         display: block;
+         margin-top: 7px;
+         font-size: 20px;
+         
+      }
+
+      @media only screen and (max-width: 681px) {
+         .logoimg {
+            width: 150px;
+            height: 150px;
+            margin-top: 25vh;
+         }
+
+         .cont {
+            gap: 5vw;
+            margin-left: 0px;
+            width: 100vw;
+            /* height: 100vh; */
+         }
+
+         .login-container {
+            width: 60vw;
+            height: 50vh;
+         }
+      }
+
+      @media only screen and (max-width: 543px) {
+         .logoimg {
+            width: 100px;
+            height: 100px;
+            margin-top: 10vh;
+            margin-left: 39vw;
+         }
+
+         .login-container {
+
+            width: 71vw;
+            height: 41vh;
+            margin-left: 10vw;
+            /* margin-top: 1vh; */
+         }
+
+         button {
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 18px;
+            background: #000000;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 5vh;
+            margin-left: 10vw;
+            font-family: Calibri, Arial, Helvetica, sans-serif;
+            font-size: 19px;
+
+         }
+
+         #password {
+            margin-top: 1vh;
+         }
+
+         .cont {
+            display: block;
+         }
+
+      }
+   </style>
+</head>
+
+<body>
+
+
+
+   <div class="cont">
+
+      <div class="image">
+         <img src="../static/images/logo1.png" alt="logo" class="logoimg">
+      </div>
+
+
+
+      <div class="login-container">
+
+         <form id="loginForm" method="POST" action="/login">
+            <h2>Login</h2>
+
+            <div class="input-group">
+               <label for="username"><b>Username</b></label>
+               <input type="text" name="username" required minlength="4" maxlength="30" autocomplete="name"
+                  id="username">
+            </div>
+
+            <div class="input-group">
+               <label for="password"><b>Password</b></label>
+               <input type="password" name="password" id="password" required minlength="8" maxlength="30"
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                  autocomplete="current-password">
+               <p>Password must be at least 8 characters long, contain 1 uppercase letter, 1 lowercase
+                  letter, 1 number,and 1 special character.</p>
+            </div>
+
+            <button type="submit"><b>Login to Doc Search Reader</b></button><br><br>
+            <a href="/signup" class="anc"><b>New User ? Create an Account</b></a>
+
+
+
+         </form>
+
+      </div>
+
+
+   </div>
+
+   <script>
+
+      "{% if (msg) %}"
+
+         window.alert("{{msg}}")
+   
+      "{% endif %}"
+
+   </script>
+
+
+</body>
+
+</html>

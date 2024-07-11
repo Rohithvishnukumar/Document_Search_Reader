@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block body %}
+
+<br><br>
+
+<h1>Document Search Reader</h1>
+<hr><br>
+
+
+<form action="/submit" method="post" enctype="multipart/form-data">
+  <!-- <input type="file" name="inpfile" id="inpfile" accept=".pdf, .docx, .xlsx, .jpg, .jpeg, .png"> -->
+
+
+  <label for="images" class="drop-container" id="dropcontainer">
+    <span class="drop-title">Drop files here</span>
+    or
+    <input type="file" name="inpfile" id="images" accept=".pdf, .docx, .xlsx, .jpg, .jpeg, .png" required><br>
+    <button type="submit" class="btn btn-outline-success sub">Upload</button>
+  </label>
+</form>
+<script src="{{url_for('static' , filename = 'JS/choosefile.js')}}"></script>
+
+
+<div id="loader" class="loader"></div>
+
+<script>
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('loader');
+
+    // Show the loader on page load
+    loader.style.visibility = 'visible';
+
+    // Hide the loader once the page has fully loaded
+    window.addEventListener('load', () => {
+        loader.style.visibility = 'hidden';
+    });
+
+    // Listen for clicks on links to show the loader
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            loader.style.visibility = 'visible';
+        });
+    });
+});
+
+</script>
+
+
+</body>
+
+</html>
+
+
+{% endblock body %}
