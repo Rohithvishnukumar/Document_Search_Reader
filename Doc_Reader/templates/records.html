@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block body %}
+
+
+<br><br>
+
+<h1>{{data.usrname}}'s Records</h1><br>
+<hr><br>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th >Download</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for i in data.table %}
+        <tr>
+            <td>{{i[1]}}</td>
+            <td ><a href="{{ url_for('download_file', file = i[1] ) }}"><button type="submit" class=" btn btn-warning">Download File</button></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+
+<!-- <script>
+    setTimeout(function(){
+        window.location.href = "/records"
+    }, 2000)
+</script> -->
+
+<!-- Use the above script if you face any delay in record loading  -->
+
+</html>
+
+
+{% endblock body %}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doc Search Reader</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="../static/images/logo1.png" type="image/x-icon">
+
+    <style>
+        span {
+            text-decoration-line: underline;
+            text-decoration-style: wavy;
+            text-decoration-thickness: 1.2px;
+            text-decoration-color: red;
+        }
+
+        mark {
+            background-color: yellow;
+        }
+
+        .cont {
+            display: flex;
+        }
+
+        pre,
+        .ptag {
+            display: flex;
+            flex-wrap: wrap;
+            font-family: Calibri;
+            font-size: 20px;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+        }
+
+        .precon {
+            width: 76vw;
+        }
+
+        .spellsugges {
+            width: 22vw;
+            height: 100vh;
+            background-color: #07dde46d;
+            margin-left: 76vw;
+            position: fixed;
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 0px;
+        }
+
+        .search {
+            margin-top: 20vh;
+        }
+
+        #srch {
+            width: 21vw;
+        }
+
+        .scr {
+            height: calc(100vh + 500px);
+            flex: 1;
+            /* Take up available space */
+            overflow-y: auto;
+            /* Enable vertical scrolling */
+        }
+        .sugges{
+            margin-left: 7.5vw;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <h1>Translated Text....</h1><br><hr>
+
+    <div class="cont">
+        <div class="precon">
+            <pre class="output">{{ text | safe }}</pre>
+
+            <br><br>
+            <hr><br>
+            <div class="aiout" style="font-family: Calibri; font-size: 20px;"></div>
+        </div>
+
+        <div class="spellsugges">
+            <div class="scr">
+                <div class="sugges" >
+                    <b>Spell Checker</b>
+                </div>
+
+                <div class="search">
+                    <form action="/search" method="post">
+                        <label for="srch">Search in Document</label><br>
+                        <input type="text" name="srch" id="srch" placeholder="Enter the words separated by commas"
+                            class="form-control" style="margin-left: 0.5vw;">
+                        <button type="submit" class="btn btn-secondary btn-sm"
+                            style="margin-left: 8vw; margin-top: 2px; width: 100px;">Search</button>
+                    </form>
+                </div><br>
+
+                <div class="advsearch">
+                    <!-- <input type="text" name="advser" id="advser"><br> -->
+                    <textarea class="form-control" name="advser" id="advser" placeholder="Search Anything in Natural Language"></textarea><br>
+                    <button type="submit" class="btn btn-dark btn-sm" id="advbutton">Advanced Search</button>
+                    </form>
+                </div><br>
+
+                <div class="summarydiv">
+                    <button type="submit" class="summary btn btn-primary btn-sm">Summarize</button>
+                </div>
+                <br><br><br><br><br>
+            </div>
+        </div>
+    </div>
+
+
+    <a href="/return"><button type="submit" class="btn btn-success me-4">Return to Doc reader</button></a>
+    <a href="/records"><button type="submit" class="btn btn-warning me-4">Records</button></a>
+
+
+
+    <script src="{{ url_for('static', filename='JS/typo_rohith.js') }}"></script>
+    <script src="{{ url_for('static', filename='JS/spell_clientside.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          }
+        }
+      </script>
+
+    <script type="module" src="{{url_for('static', filename = 'JS/advancedsearch.js')}}"></script>
+
+
+    <br><br><br><br><br><br><br>
+
+
+</body>
+
+</html>
