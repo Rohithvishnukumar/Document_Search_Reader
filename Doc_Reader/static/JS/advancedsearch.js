@@ -13,8 +13,9 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 async function run(prompt) 
 {
+    const content = document.querySelector(".output").innerHTML
     // const pr = jindata + "\n" + "Analyse the above document and Search for" + prompt + "Dont search in the internet tell only based on the information provided and tell whether it is said explicitly or implicitly in the document and also give the lines in the documet from where you have taken"
-    const pr = jindata + "\n" + "Analyse the above document and Search for" + `"${prompt}"` + "Dont search in the internet tell only based on the information provided and also give the lines in the documet from where you have taken"
+    const pr = content + "\n" + "Analyse the above document and Search for" + `"${prompt}"` + "Dont search in the internet tell only based on the information provided and also give the lines in the documet from where you have taken"
     // const pr = jindata + "\n" + "Analyse the above document and Search for" + prompt + "Dont search in the internet tell only based on the information provided "
     // const pr =  jindata + "\n" + "Analyse the above document and answer the questions" +  prompt + "Dont search in the internet tell only based on the information provided and also give the lines in the documet from where you have taken "
 
