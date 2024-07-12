@@ -1,9 +1,10 @@
 # ------------------------------------Doc Search Reader-------------------------------------------
 # ///////////////////////////////// Developed by Rohith Vishnu ////////////////////////////////////
 
+# Use Python 3.11 or later
 
 
-
+# import shutil
 from threading import Timer
 # import pdfplumber
 from reportlab.lib.pagesizes import A4
@@ -25,8 +26,6 @@ import re
 from openpyxl.drawing.image import Image as OpenpyxlImage
 import spacy
 import nltk
-import fitz
-import pytesseract
 import pkg_resources
 from symspellpy import SymSpell, Verbosity
 import string
@@ -84,9 +83,14 @@ app.config["MYSQL_DB"] = os.getenv("MYSQL_DB")
 def index():
     return render_template("login.html")
 
+
 @app.route("/return", methods=["GET"])
 def routereturn():
-    return render_template("index.html", username = session["username"])
+
+    if(session["username"]):
+        return render_template("index.html", username = session["username"])
+    else:
+        return render_template("error_page.html", errdata = "Must login")
 
 
 
@@ -94,7 +98,7 @@ def routereturn():
 def submit():
     if request.method == "POST":
         if "inpfile" not in request.files:
-            return "An Error Occurred - File not Found"
+            return render_template("error_page.html", errdata = "An Error Occurred - File not Found")
 
         file = request.files["inpfile"]
         if file.filename == "":
@@ -369,6 +373,9 @@ def search():
     return render_template("trans.html", text=highlighted_text)
 
 
+
+#---------------------------------------LOGIN-------------------------------------
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
@@ -424,6 +431,8 @@ def login():
 
 
 
+#--------------------------------- Multifactor Authentication----------------------------------
+
 @app.route("/mfa", methods = [ "GET",  "POST"])
 def mfa():
 
@@ -433,14 +442,16 @@ def mfa():
     otpcheck = int(request.form["numotp"])
 
     if(otpcheck == session['otp']):
-        # session.pop("otp")
+        session.pop("otp")
         return render_template("index.html", username = session["username"])
     
     else:
-        # session.pop("otp")
+        session.pop("otp")
         return render_template("login.html", msg = "Your OTP is incorrect. Try Logging in again" )
 
 
+
+# -----------------------------------Signup----------------------------------------------
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -483,6 +494,9 @@ def signup():
 
 
 
+#-----------------------------------Records and Summary--------------------------------------------
+
+
 @app.route("/summarypage", methods = ["GET","POST"])
 def summaryroute():
 
@@ -522,6 +536,11 @@ def records():
 
     if(request.method == "GET"):
 
+        # try:
+        #     shutil.rmtree('./uploads')
+        # except:
+        #     print("error in deleting uploads folder")
+
         usr = session["username"]
         userid = int(session["userid"])
 
@@ -559,6 +578,8 @@ def wrap_text(text, max_width, font_size, canvas):
 
 
 
+# -------------------------------------------File Downloading------------------------------------
+
 
 @app.route("/download/<file>")
 def download_file(file):
@@ -595,11 +616,29 @@ def download_file(file):
 def delete_file(pdf_filename):
     try:
         os.remove(pdf_filename)
+        
     except Exception as e:
         print(f"Error deleting file: {e}")
 
 
 
 
+
+@app.route("/logout")
+def logout():
+    
+    session.clear()
+    return redirect("/login")
+
+
+
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
+
+
+
+
+# ------------------------------------Doc Search Reader-------------------------------------------
+# Author: Rohith Vishnu Kumar
