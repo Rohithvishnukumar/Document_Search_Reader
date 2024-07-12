@@ -56,9 +56,9 @@
 
                 <li class="nav-item ms-auto " style="list-style-type: none;">
                     {% if (username) %}
-                        <a class="nav-link active fs-4 " href="/login"><b>{{username}}</b></a>
+                        <a class="nav-link active fs-4 " href="/logout"><b>{{username}}</b></a>
                     {% elif (data.usrname) %}
-                        <a class="nav-link active fs-4 " href="/login"><b>{{data.usrname}}</b></a>
+                        <a class="nav-link active fs-4 " href="/logout"><b>{{data.usrname}}</b></a>
                     {% else %}
                         <a class="nav-link active fs-4 " href="/login"><b>Login/Signup</b></a>
                     {% endif %}
